@@ -1,0 +1,7 @@
+{
+  "name": "{{NAME}}",
+  "types": {
+    "synthesis": {"folder": "syntheses", "label": "Syntheses"},
+    "source": {"folder": "sources", "label": "Sources"}
+  }
+}

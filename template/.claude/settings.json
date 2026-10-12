@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python tools/*)",
+      "PowerShell(python tools/*)",
+      "Bash(python -I tools/*)",
+      "PowerShell(python -I tools/*)"
+    ],
+    "ask": [
+      "Bash(pip *)",
+      "Bash(python -m pip *)",
+      "PowerShell(pip *)",
+      "PowerShell(python -m pip *)"
+    ]
+  }
+}

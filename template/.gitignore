@@ -1,0 +1,15 @@
+# Obsidian per-device UI state (changes constantly, not worth versioning)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Claude Code per-machine settings
+.claude/settings.local.json
+
+# Python
+__pycache__/
+.venv/
+
+# Downloaded reference material (D-017); large and re-downloadable, never committed
+cache/
