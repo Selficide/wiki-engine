@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1 (2026-10-12)
+- `build_index.py` skips dotfiles (e.g. `.gitkeep`) in `raw/`, so a new vault's empty folders don't show up as assets.
+
 ## 0.1.0 (2026-10-12)
 Extracted from the Mind Palace vault (its decisions D-001 to D-027).
 - Rules split: generic rules in `meta/Engine.md`; each vault's own rules in `meta/Schema.md`, which wins on conflict.

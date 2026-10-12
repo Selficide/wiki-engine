@@ -44,7 +44,7 @@ def raw_sections(pages):
     referenced, superseded = raw_provenance(pages)
     pending, assets = [], []
     for f in sorted(RAW.rglob("*")):
-        if not f.is_file():
+        if not f.is_file() or f.name.startswith("."):  # .gitkeep and the like
             continue
         rel = f.relative_to(ROOT).as_posix()
         if rel.startswith("raw/assets/"):
