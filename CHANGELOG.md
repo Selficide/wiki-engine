@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+- Claude Code plugin packaging: `.claude-plugin/plugin.json`, plus a one-plugin catalog
+  (`.claude-plugin/marketplace.json`, name `wiki-engine-market`).
+- Skills `/wiki-engine:init` and `/wiki-engine:sync` wrap `engine.py`. The plugin has no `version`, so installs track
+  commits; vaults still record `ENGINE_VERSION` through sync.
+
 ## 0.3.1 (2026-10-13)
 - The cross-model reviewer is described in the owner's own Claude Code instructions (e.g. `~/.claude/CLAUDE.md`), not
   in a vault's `Schema.md`. Vaults never name a reviewer. The template's reviewer section is removed.

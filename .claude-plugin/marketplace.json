@@ -1,0 +1,12 @@
+{
+  "name": "wiki-engine-market",
+  "description": "The wiki engine plugin",
+  "owner": {"name": "Damien Ratliff"},
+  "plugins": [
+    {
+      "name": "wiki-engine",
+      "source": "./",
+      "description": "Create LLM-maintained wiki vaults and keep their engine files up to date"
+    }
+  ]
+}

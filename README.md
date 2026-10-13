@@ -40,7 +40,20 @@ Nothing in the engine requires a particular app: the scripts and Claude do all t
 
 The engine's rules require any non-standard syntax to stay readable as plain Markdown, so a vault never depends on one app.
 
-## Quick start
+## Quick start: as a Claude Code plugin
+In a Claude Code session:
+```
+/plugin marketplace add <owner>/wiki-engine
+/plugin install wiki-engine@wiki-engine-market
+/wiki-engine:init C:\path\to\my-wiki "My Wiki"
+```
+- **Private repo:** this needs git access to the repository on your machine (for GitHub, `gh auth login` then
+  `gh auth setup-git`).
+- **Plugin updates:** turn on auto-update for the marketplace in `/plugin`, or run `/plugin marketplace update`.
+- **Updating a vault:** a plugin update never changes your vaults by itself. Open a vault and run `/wiki-engine:sync`
+  to bring it up to date.
+
+## Quick start: without the plugin
 ```
 git clone <this repo> wiki-engine
 python wiki-engine/engine.py init my-wiki --name "My Wiki"

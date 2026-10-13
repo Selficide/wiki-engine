@@ -1,0 +1,5 @@
+{
+  "name": "wiki-engine",
+  "description": "Set up and update LLM-maintained Markdown wikis (Karpathy's LLM Wiki pattern): rules, /ingest, /ask and /lint workflows, and checking scripts.",
+  "author": {"name": "Damien Ratliff"}
+}
