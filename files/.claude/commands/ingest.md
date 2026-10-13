@@ -47,8 +47,9 @@ Arguments: $ARGUMENTS
      claim.
    - Record contradictions where the page template says (see "Surface conflict").
    - Make links both ways where the relationship matters: if A explains B, B's Relationships section mentions A.
-6. **Cross-model review** if the ingest qualifies (`Engine.md`, "Cross-model review"): delegate the review, verify each
-   finding against the raw file, fix the verified ones and their copies elsewhere, and label the run.
+6. **Cross-model review** if the vault has a reviewer and the ingest qualifies (`Engine.md`, "Cross-model review"):
+   send the review, verify each finding against the raw file, fix the verified ones and their copies elsewhere, and
+   label the run if the reviewer supports it.
 7. **Bookkeeping** as `Engine.md` describes: index, log, commit.
 8. **Report:** pages created, pages updated, failed fetches, contradictions found, cross-model review results (or why
    it was skipped), and suggested follow-ups.

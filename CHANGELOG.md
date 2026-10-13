@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 (2026-10-13)
+- **File format rule:** vaults are Markdown, YAML frontmatter, wikilinks by name and callouts. Obsidian is recommended,
+  not required. Non-standard syntax must stay readable as plain Markdown, so app-only query blocks stay out of
+  `wiki/`.
+- **Optional cross-model review:** it runs only when the vault names a reviewer in `Schema.md` (template section
+  added). Engine rules and `/ingest` no longer name a specific tool.
+- **Sharing prep:**
+  - README rewritten for people outside this machine;
+  - template allows `python3 tools/*`;
+  - vault-specific references removed from the template and rationale.
+
 ## 0.2.0 (2026-10-13)
 - **Domains:** an optional `"domains"` list in `meta/vault.json`, and `domain:` on top-level hubs (sub-topics
   inherit it). `frontmatter.py` checks them.

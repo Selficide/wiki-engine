@@ -125,6 +125,15 @@ and `original_filename:` when the owner supplied the file.
 In place of `fetched:`, use `added:`. The body is the document exactly as received, with frontmatter prepended.
 Assets in `raw/assets/` are copied byte-for-byte, with no frontmatter.
 
+## File format
+Vaults are plain Markdown files with YAML frontmatter, `[[wikilinks]]` resolved by file name, and callouts
+(`> [!type]`). Obsidian is the recommended viewer; nothing in the engine requires it, since the tools and Claude do
+all the work.
+- **Graceful degradation:** any syntax a plain Markdown viewer doesn't understand (callouts, embeds, Obsidian-only
+  blocks) must still read sensibly as plain text. A callout becomes a quote block, which passes. A query block that
+  only renders inside one app (e.g. Obsidian Bases) does not, so it doesn't go in `wiki/`.
+- Viewer settings (`.obsidian/` or another app's folder) are optional per vault, never required by a workflow.
+
 ## Links
 - Between vault pages, use only `[[Page Name]]` or `[[Page Name|display text]]`. Never use markdown links.
 - External URLs appear only on source pages.
@@ -246,11 +255,12 @@ Rules:
 - Script output is a lead, not a verdict: check a finding before acting on it, and do the judgment checks yourself.
 
 ## Cross-model review
-A model from another family checks complex ingests against their raw sources, through the `agent-harness` MCP
-server's `delegate` tool.
+A model from another family checks complex ingests against their raw sources. This step is **optional**: it runs
+only when the vault names a reviewer in `meta/Schema.md` (a tool that sends a read-only review request to another
+model, such as an MCP server). Without one, skip it and say so in the log entry and the final report.
 - **When:** an ingest that adds a primary source whose raw file is over ~5 KB, adds three or more sources, or creates
   or substantially updates three or more pages. Also whenever the owner asks, and optionally during `/lint`.
-- **When not:** skip it if the harness is unavailable, `runs_report` shows quota at 75% or more, or a run is refused.
+- **When not:** skip it if no reviewer is configured or reachable, its quota is at 75% or more, or a run is refused.
   Say so in the log entry and the final report; never block the ingest on it.
 - **Request:** `type: review`, `workdir` the vault root, `inputs` the source pages written plus the other pages whose
   claims cite them, `source_of_truth` the raw files, and criteria in this order: claims that contradict
@@ -259,7 +269,7 @@ server's `delegate` tool.
   pages are right.
 - **After:** findings are claims, not facts. Check each against the cited raw lines before fixing; drop the ones
   that don't hold. Search the wiki for the same error on pages the reviewer didn't read, since copies are common.
-  Label the run with `run_label`. The log entry gives the reviewer, the findings count, how many were verified and
+  If the reviewer records run outcomes, label the run. The log entry gives the reviewer, the findings count, how many were verified and
   fixed, and any extra copies found.
 - Review before the ingest's commit, so the commit holds the corrected pages.
 

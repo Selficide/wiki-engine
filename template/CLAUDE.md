@@ -1,6 +1,6 @@
 # {{NAME}}
 
-This folder is an Obsidian vault run as an LLM-maintained wiki, built on the wiki engine (Karpathy's "LLM Wiki"
+This folder is a Markdown vault (best viewed in Obsidian) run as an LLM-maintained wiki, built on the wiki engine (Karpathy's "LLM Wiki"
 pattern). The owner supplies sources and questions. Claude maintains the wiki.
 
 - `raw/`: immutable source material. Never edit, rename, or delete anything here.

@@ -4,6 +4,8 @@
       "Bash(python tools/*)",
       "PowerShell(python tools/*)",
       "Bash(python -I tools/*)",
+      "Bash(python3 tools/*)",
+      "Bash(python3 -I tools/*)",
       "PowerShell(python -I tools/*)"
     ],
     "ask": [

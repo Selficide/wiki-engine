@@ -81,7 +81,7 @@ when). A vault's own dated decisions are in its `meta/Decisions.md`.
 - **Split pages over 15 KB.** Pages that accumulate a bullet per source degrade into source-by-source lists.
 
 ## Domains
-Drawn from how large collections scale (research report in the Mind Palace vault, 2026-10-13):
+Drawn from how other systems group large collections (researched 2026-10-13):
 - **A small, fixed top level.** Dewey's 10 classes and Johnny.Decimal's 10 areas keep the top level broad and filing
   decisions few.
 - **Groups only when material exists.** This is the Library of Congress's "literary warrant", and why topics need
@@ -104,11 +104,17 @@ The domain lives only on hubs so a reorganization re-labels hubs, never pages.
 - **Layout-specific HTML extractors.** Precise where markup is regular (Sphinx), with a generic article extractor
   for everything else. The injection check reports hidden or instruction-like text rather than keeping it silently.
 
+## File format
+Treating the format, not the app, as the requirement keeps vaults readable anywhere: in GitHub, in a code
+editor, or after Obsidian. Obsidian is closed-source; the files outlive it. Wikilinks by name stay, because
+path-based Markdown links break whenever a file moves.
+
 ## Cross-model review
 Reviews of ingests by a model from another family found real fidelity errors the writer missed: generalized claims,
 dropped hedges, unsupported attributions, omissions. A same-family reviewer risks sharing the writer's blind spots and
 preferring its own text. Reviewers miss copies of an error on pages they weren't given, hence the search step.
-Reviewing only larger ingests saves quota.
+Reviewing only larger ingests saves quota. It's optional because it needs a second model the owner has access to;
+the rest of the engine works without it.
 
 ## Bookkeeping
 - **Commit after every workflow.** Every AI change is diffable and reversible, and the git log is an audit trail
