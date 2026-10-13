@@ -5,6 +5,7 @@ Wiki pages:
   - type valid and matching its folder
   - topics non-empty, and each one defined by a hub page (hub: true)
   - hubs: synthesis, one topic, valid status/parent/tag_vocab; exactly one hub per topic
+  - domains: each top-level hub names a domain from vault.json (when it declares any); sub-topic hubs inherit theirs
   - tags drawn from the tag_vocab of the page's topics
   - fields vault.json declares for the page's type: required, allowed values, format; not on other types
   - page size: pages over 15 KB (split candidates)
@@ -26,7 +27,7 @@ import re
 from collections import defaultdict
 from datetime import date
 
-from vaultlib import (FOLDER_TYPE, RAW, ROOT, TYPES, as_list, cited_sources, frontmatter_sources, norm,
+from vaultlib import (DOMAINS, FOLDER_TYPE, RAW, ROOT, TYPES, as_list, cited_sources, frontmatter_sources, norm,
                       split_frontmatter, topic_registry, utf8_stdout, wiki_pages)
 
 COMMON = ["type", "summary", "aliases", "topics", "tags", "created", "updated"]
@@ -44,7 +45,7 @@ KIND = {"primary", "secondary"}
 LOOSE_DATE = re.compile(r"^(\d{4}(-\d{2}(-\d{2})?)?\b(?![./-]\d)|[A-Za-z]|$)")
 WIKILINK = re.compile(r"^\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]$")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-HUB_FIELDS = {"hub", "parent", "status", "tag_vocab", "stale_after"}
+HUB_FIELDS = {"hub", "parent", "status", "tag_vocab", "stale_after", "domain"}
 LEADING_DATE = re.compile(r"^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?")
 TOPIC_STATUS = {"active", "dormant"}
 
@@ -214,6 +215,17 @@ def check_hubs(pages, registry):
             rows.append(f"{p.name}: missing parent: (leave empty for a top-level topic)")
         elif parent and (parent not in registry or parent in p.topics):
             rows.append(f"{p.name}: parent: {parent!r} is not another topic")
+        domain = str(m.get("domain", "")).strip()
+        if not DOMAINS:
+            if domain:
+                rows.append(f"{p.name}: domain: {domain!r} set, but meta/vault.json declares no domains")
+        elif parent:
+            if domain:
+                rows.append(f"{p.name}: sub-topic hubs inherit their parent's domain; remove domain:")
+        elif not domain:
+            rows.append(f"{p.name}: missing domain: (one of {', '.join(DOMAINS)})")
+        elif domain not in DOMAINS:
+            rows.append(f"{p.name}: domain: {domain!r} is not declared in meta/vault.json")
         sa = m.get("stale_after")
         if sa not in (None, "") and not (str(sa).isdigit() and int(sa) > 0):
             rows.append(f"{p.name}: stale_after: {sa!r} should be a whole number of months, or omitted")

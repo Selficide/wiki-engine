@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 (2026-10-13)
+- **Domains:** an optional `"domains"` list in `meta/vault.json`, and `domain:` on top-level hubs (sub-topics
+  inherit it). `frontmatter.py` checks them.
+- **Index:**
+  - `index.md` opens with a map grouped by domain.
+  - Each topic's page list is a collapsed Obsidian callout under its domain's heading.
+  - Vaults without domains get one group.
+- **Rules:**
+  - A page's first topic is its home.
+  - Sub-topics go at most one level deep.
+  - Index scale triggers: per-domain index files at about 100 KB, local search at about 1,000 pages.
+
 ## 0.1.1 (2026-10-12)
 - `build_index.py` skips dotfiles (e.g. `.gitkeep`) in `raw/`, so a new vault's empty folders don't show up as assets.
 

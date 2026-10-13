@@ -44,21 +44,34 @@ rule. Decisions the owner makes directly are recorded as approved immediately.
     bears on how *this vault* works, record it there, not in `wiki/`. Wiki pages never discuss the vault's design.
 
 ## Topics
-A vault can hold several unrelated knowledge domains ("topics") in one place.
+A vault can hold several unrelated subjects ("topics") in one place, grouped into a few broad domains.
 - Every wiki page has `topics: [<slug>, ...]` in its frontmatter, using kebab-case slugs. A page may belong to more
   than one topic, but only when its own content covers each one; a link alone doesn't count.
+- **The first topic is the page's home**; any others are cross-listings. Put a page in the most specific topic that
+  fits, not also in that topic's parent.
 - **A topic exists when it has a hub page.** The hub is a synthesis page that is the topic's entry point and
   its registry entry. There is no other list of topics; `python tools/pages.py --type synthesis` shows the hubs.
   Hub frontmatter, in addition to the usual fields:
   ```
   hub: true
   parent:            # another topic's slug, or empty for a top-level topic
+  domain:            # top-level topics only: a domain slug from meta/vault.json (sub-topics inherit it)
   status: active     # active | dormant (no longer being added to)
   tag_vocab: []      # the tags pages in this topic may use
   stale_after: 12    # optional, months: flag pages whose newest cited source is older
   ```
   A hub carries exactly one slug in `topics:`, the topic it defines.
-- `wiki/index.md` is grouped by topic first, then by page type. Each topic section starts with its hub.
+- **Domains** are the level above topics: broad, few (about 10 at most) and rarely changed. A vault declares them
+  in `meta/vault.json` as `"domains": [{"slug", "name", "description"}]` (optional; without them the index has one
+  group). Only top-level hubs carry `domain:`; pages never do, so moving a topic to another domain is a one-line
+  edit. Domains form a strict tree: one per topic. Cross-cutting themes (security, testing) are tags, not domains or
+  topics.
+- **Sub-topics** go at most one level deep. A sub-topic that needs its own sub-topics should be promoted.
+- `wiki/index.md` starts with a map (domains, their topics, sub-topics), then one section per domain holding a
+  collapsed block per topic: the hub first, then pages by type.
+- **Index scale triggers.** When `index.md` passes about 100 KB, or a domain holds more than about 10 topics,
+  propose generating one index file per domain with `index.md` as the map only. Past about 1,000 pages, or when the
+  index stops finding things, propose local search. Raise either with the owner.
 - When a new source opens a new topic, create its hub and index section in the same ingest.
 - **Split triggers.** Move a topic to its own vault if any of these become true:
   - it needs a privacy or sharing boundary;

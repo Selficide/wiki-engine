@@ -80,6 +80,21 @@ when). A vault's own dated decisions are in its `meta/Decisions.md`.
   dates. A date in the sentence costs nothing and tells a reader how far to trust it.
 - **Split pages over 15 KB.** Pages that accumulate a bullet per source degrade into source-by-source lists.
 
+## Domains
+Drawn from how large collections scale (research report in the Mind Palace vault, 2026-10-13):
+- **A small, fixed top level.** Dewey's 10 classes and Johnny.Decimal's 10 areas keep the top level broad and filing
+  decisions few.
+- **Groups only when material exists.** This is the Library of Congress's "literary warrant", and why topics need
+  hubs.
+- **One home plus cross-lists.** arXiv's model: a primary category plus cross-listings.
+- **Pages go in the most specific group, and groups form a strict tree.** Wikipedia's categories, which allow several
+  parents, sprawl.
+- **Cross-cutting aspects become facets, not branches.** ACM's 2012 classification, which stopped repeating testing
+  and performance under every branch.
+- **Search, not directories, at large scale.** The fate of Yahoo and DMOZ.
+
+The domain lives only on hubs so a reorganization re-labels hubs, never pages.
+
 ## Tools
 - **Scripts for mechanical checks.** Checks like broken links, orphans, and "does this page exist" otherwise mean
   reading dozens of pages each run, at a cost that grows with the vault. A script does it exactly and prints only

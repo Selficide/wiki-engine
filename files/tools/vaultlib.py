@@ -21,10 +21,12 @@ ENGINE_TYPES = ("source", "synthesis")
 
 
 def load_config():
-    """The vault's meta/vault.json: its name and page types (folder, index label, extra fields).
+    """The vault's meta/vault.json: its name, page types (folder, index label, extra fields) and domains.
 
     Each extra field is {"required": bool, "values": [...], "format": "date" | "list", "pattern": regex},
     all optional. The order of "types" is the order of groups in the index.
+    "domains" is optional: [{"slug", "name", "description"}], the broad groups top-level topics belong to,
+    in index order.
     """
     path = ROOT / "meta" / "vault.json"
     try:
@@ -34,12 +36,16 @@ def load_config():
     missing = [t for t in ENGINE_TYPES if t not in config.get("types", {})]
     if missing:
         sys.exit(f"meta/vault.json: types must include {', '.join(missing)}")
+    for d in config.get("domains", []):
+        if not (isinstance(d, dict) and d.get("slug") and d.get("name")):
+            sys.exit(f"meta/vault.json: each domain needs a slug and a name: {d!r}")
     return config
 
 
 CONFIG = load_config()
 TYPES = CONFIG["types"]
 FOLDER_TYPE = {spec["folder"]: name for name, spec in TYPES.items()}
+DOMAINS = {d["slug"]: d for d in CONFIG.get("domains", [])}  # insertion order = index order
 
 _LIST_ITEM = re.compile(r'\s*(?:"([^"]*)"|\'([^\']*)\'|([^,]+))')
 
@@ -241,6 +247,21 @@ def topic_registry(pages):
             for t in p.topics:
                 registry.setdefault(t, []).append(p)
     return registry
+
+
+def topic_domains(registry):
+    """Topic slug -> domain slug ("" if none). Sub-topics inherit their top-level ancestor's domain."""
+    out = {}
+    for slug in registry:
+        seen, cur = set(), slug
+        while cur in registry and cur not in seen:
+            seen.add(cur)
+            parent = str(registry[cur][0].meta.get("parent", "")).strip()
+            if not parent:
+                break
+            cur = parent
+        out[slug] = str(registry[cur][0].meta.get("domain", "")).strip() if cur in registry else ""
+    return out
 
 
 def norm(s):
