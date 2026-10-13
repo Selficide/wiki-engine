@@ -24,7 +24,10 @@ def git(*args):
 
 
 def last_lint():
-    out = git("log", "-1", "--format=%H %cs %s", "--grep=^Lint:", "--extended-regexp")
+    try:
+        out = git("log", "-1", "--format=%H %cs %s", "--grep=^Lint:", "--extended-regexp")
+    except subprocess.CalledProcessError:  # a new vault with no commits yet
+        return None
     return out.strip() or None
 
 
