@@ -256,8 +256,10 @@ Rules:
 
 ## Cross-model review
 A model from another family checks complex ingests against their raw sources. This step is **optional**: it runs
-only when the vault names a reviewer in `meta/Schema.md` (a tool that sends a read-only review request to another
-model, such as an MCP server). Without one, skip it and say so in the log entry and the final report.
+only when the session has a reviewer, meaning a tool that sends a read-only review request to another model (such
+as an MCP server), described in the owner's own Claude Code instructions (e.g. `~/.claude/CLAUDE.md`). Vaults never
+name a reviewer: which one is available depends on the owner's machine, not the vault. Without one, skip the step and
+say so in the log entry and the final report.
 - **When:** an ingest that adds a primary source whose raw file is over ~5 KB, adds three or more sources, or creates
   or substantially updates three or more pages. Also whenever the owner asks, and optionally during `/lint`.
 - **When not:** skip it if no reviewer is configured or reachable, its quota is at 75% or more, or a run is refused.

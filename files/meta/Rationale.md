@@ -114,7 +114,8 @@ Reviews of ingests by a model from another family found real fidelity errors the
 dropped hedges, unsupported attributions, omissions. A same-family reviewer risks sharing the writer's blind spots and
 preferring its own text. Reviewers miss copies of an error on pages they weren't given, hence the search step.
 Reviewing only larger ingests saves quota. It's optional because it needs a second model the owner has access to;
-the rest of the engine works without it.
+the rest of the engine works without it. The reviewer is described in the owner's own instructions, not in the vault,
+because it's a property of their machine: a vault that named it would break or mislead when copied or shared.
 
 ## Bookkeeping
 - **Commit after every workflow.** Every AI change is diffable and reversible, and the git log is an audit trail

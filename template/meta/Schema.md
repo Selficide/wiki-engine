@@ -11,9 +11,5 @@ and template.
 ## Vault-specific rules
 None yet.
 
-## Cross-model reviewer
-None configured, so ingests skip cross-model review (`Engine.md`, "Cross-model review"). To enable it, name the tool
-here: how to send a review request, and how to check quota and label runs if it supports them.
-
 ## Vault tools
 None yet. Scripts added to `tools/` that aren't engine-owned (see `meta/ENGINE`) are listed here.

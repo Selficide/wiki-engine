@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2026-10-13)
+- The cross-model reviewer is described in the owner's own Claude Code instructions (e.g. `~/.claude/CLAUDE.md`), not
+  in a vault's `Schema.md`. Vaults never name a reviewer. The template's reviewer section is removed.
+
 ## 0.3.0 (2026-10-13)
 - **File format rule:** vaults are Markdown, YAML frontmatter, wikilinks by name and callouts. Obsidian is recommended,
   not required. Non-standard syntax must stay readable as plain Markdown, so app-only query blocks stay out of

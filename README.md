@@ -66,8 +66,9 @@ If you edited an engine file inside your vault, `sync` refuses to overwrite it. 
 
 ## Optional: cross-model review
 Ingests can be checked by a model from a different family, which catches claims the writer generalized or invented.
-This needs a tool that sends a read-only review request to the other model, such as an MCP server. Name it in your
-vault's `meta/Schema.md` ("Cross-model reviewer"). Without one, the step is skipped and the log says so.
+This needs a tool that sends a read-only review request to the other model, such as an MCP server. Describe it in
+your own Claude Code instructions (`~/.claude/CLAUDE.md`), not in a vault: which tool to call, and how to check quota
+and record outcomes if it supports that. Without one, the step is skipped and the log says so.
 
 ## Changing the engine
 1. Edit under `files/` and test against your vaults (sync, then run each vault's tools).
