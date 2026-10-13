@@ -43,7 +43,7 @@ The engine's rules require any non-standard syntax to stay readable as plain Mar
 ## Quick start: as a Claude Code plugin
 In a Claude Code session:
 ```
-/plugin marketplace add <owner>/wiki-engine
+/plugin marketplace add Selficide/wiki-engine
 /plugin install wiki-engine@wiki-engine-market
 /wiki-engine:init C:\path\to\my-wiki "My Wiki"
 ```
@@ -55,7 +55,7 @@ In a Claude Code session:
 
 ## Quick start: without the plugin
 ```
-git clone <this repo> wiki-engine
+git clone https://github.com/Selficide/wiki-engine.git
 python wiki-engine/engine.py init my-wiki --name "My Wiki"
 cd my-wiki
 claude
