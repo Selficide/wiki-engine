@@ -13,7 +13,9 @@ sources, writes and links the wiki pages, cites every claim, and keeps the whole
 - **Scripts** (`tools/`, Python standard library only):
   - link checking, frontmatter validation and index generation;
   - safe renames and source bookkeeping;
-  - HTML-to-Markdown extraction for fetched articles.
+  - HTML-to-Markdown extraction for fetched articles;
+  - optional checks with [TypeSafe's Jev](https://docs.typesafe.ai/) model: prompt-injection screening of fetched
+    pages, claim-support checks, and page search for `/ask` (see "Optional: Jev" below).
 - **A vault template**: a new vault starts with the folders, a schema file for its own rules, and a decision log.
 
 ## Requirements
@@ -21,6 +23,16 @@ sources, writes and links the wiki pages, cites every claim, and keeps the whole
 - Python 3.10+ on your PATH as `python`. On macOS and Linux, if only `python3` exists, add an alias.
 - git.
 - A Markdown viewer that understands wikilinks (see below).
+
+## Optional: Jev
+Three workflow steps can use TypeSafe's Jev API. Everything works without it.
+- Get an API key from TypeSafe and set it as the user environment variable `TYPESAFE_API_KEY` (Windows: Start,
+  "Edit environment variables for your account"; macOS/Linux: your shell profile). Restart the app that runs Claude.
+- To keep the key under another name, create `tools/jev.local.json` in the vault with `{"key_env": "YOUR_NAME"}`
+  (gitignored; it holds the name, never the key).
+- Check with `python tools/jev.py status`.
+- It sends vault content (fetched pages, wiki pages, page summaries) to TypeSafe's API. Don't configure a key in a
+  vault whose content shouldn't leave your machine.
 
 ## File format and viewers
 A vault is a folder of plain Markdown files using:

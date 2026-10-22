@@ -6,6 +6,16 @@
 - Skills `/wiki-engine:init` and `/wiki-engine:sync` wrap `engine.py`. The plugin has no `version`, so installs track
   commits; vaults still record `ENGINE_VERSION` through sync.
 
+## 0.4.0 (2026-10-21)
+- **Optional Jev checks** (`meta/Engine.md`, "Jev"), using TypeSafe's Jev model through a standard-library client
+  (`tools/jev.py`, `jevlib.py`, `jev_screen.py`, `jev_claims.py`, `jev_find.py`, `jev_questions.json`):
+  - `/ingest`: an injection screen of each fetched page before its text is read;
+  - `/lint` and before a cross-model review: claim checks of each cited claim against its raw files;
+  - `/ask`: page search across the whole wiki, with a "does the wiki cover this?" score.
+  All advisory and skipped cleanly without a key. The key comes from `TYPESAFE_API_KEY`, or a variable named in a
+  gitignored `tools/jev.local.json`. Only vault files may be sent, enforced in code.
+- Template `.gitignore` ignores `tools/jev.local.json`.
+
 ## 0.3.1 (2026-10-13)
 - The cross-model reviewer is described in the owner's own Claude Code instructions (e.g. `~/.claude/CLAUDE.md`), not
   in a vault's `Schema.md`. Vaults never name a reviewer. The template's reviewer section is removed.

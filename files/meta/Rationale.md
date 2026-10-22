@@ -104,6 +104,33 @@ The domain lives only on hubs so a reorganization re-labels hubs, never pages.
 - **Layout-specific HTML extractors.** Precise where markup is regular (Sphinx), with a generic article extractor
   for everything else. The injection check reports hidden or instruction-like text rather than keeping it silently.
 
+## Jev (optional)
+- **Why a second, small model at all.** Some checks are many narrow judgments over the same text: is this paragraph
+  addressed to an AI reader, does this source support this claim, which page covers this question. A typed,
+  probability-returning model does those in one cheap request, and its answers can be thresholded in code instead
+  of parsed from prose.
+- **What the evaluations showed** (in the vault where the tools were built, October 2026; vendor model, small test
+  sets, partly tuned on the same data):
+  - injection screen: 30 of 30 planted injections flagged at "possible" and 24 at "likely", against 2 for the
+    extractor's regex, with "likely" false alarms on 2 of 81 clean pages. Most false alarms were prompts a page
+    shows as examples, which a separate "is this framed as an example?" question tempers;
+  - claim checks: all 58 planted errors flagged; on 249 claims a cross-model review had passed, 2 real miscitations
+    found among 8 flags;
+  - page search: a right page ranked first for 32 of 33 plain-language questions, against 15 for keyword search,
+    and a coverage score that separated covered from uncovered questions (0.51 or more, against 0.02).
+- **Why advisory everywhere.** TypeSafe's own documentation says adversarial content can move Jev's answers, and
+  half the claim-check flags were leads or noise rather than errors. Every finding is checked by Claude or the
+  owner before it changes anything.
+- **Why the safeguards are in code.** The tool runs without a prompt and uploads files, so a successful prompt
+  injection could try to use it as a channel. The vault-only path rule and the absence of a raw-request command
+  turn that into an error rather than an upload.
+- **Why optional, and why the key name is configurable.** It needs a paid account, it sends content off the
+  machine, and people name their environment variables differently. Defaulting to the vendor's name and allowing a
+  local override means no one inherits another person's setup.
+- **Why claim checks before the cross-model review, but hidden from it.** They catch a different kind of mistake
+  (claims cited to a source that doesn't state them) for a fraction of the cost, and keeping the reviewer blind to
+  them keeps the review independent.
+
 ## File format
 Treating the format, not the app, as the requirement keeps vaults readable anywhere: in GitHub, in a code
 editor, or after Obsidian. Obsidian is closed-source; the files outlive it. Wikilinks by name stay, because

@@ -7,7 +7,11 @@ them throughout.
 
 Question: $ARGUMENTS
 
-1. Work out which topic(s) the question belongs to: `--topic` if given, otherwise from the hubs
+1. If Jev is configured (`Engine.md`, "Jev"), start with `python tools/jev.py find "<question>"`. If its coverage is
+   under 0.5, say early that the wiki may not cover this, and confirm from the most likely hub before answering
+   "not covered". Otherwise read its top-ranked pages first (those at 0.05 or more, at most five), then continue
+   below; the ranking only decides where to start. Without a key, skip this and say "Jev find skipped".
+   Then work out which topic(s) the question belongs to: `--topic` if given, otherwise from the hubs
    (`python tools/pages.py --type synthesis --summary`). Read that topic's catalog with
    `python tools/pages.py --topic <slug> --summary` instead of `wiki/index.md`, and read its hub page.
    Then search `wiki/` (titles, aliases, body text), restricted to pages with that slug in

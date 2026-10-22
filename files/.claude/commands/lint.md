@@ -33,6 +33,10 @@ duplicates check). Spot-check their findings before reporting them, and do the r
 - Markdown links used between vault pages (should be wikilinks).
 
 **Provenance**
+- Jev claim checks, if configured (`Engine.md`, "Jev"): run `python tools/jev.py claims <page>` on every
+  non-source page in the judgment-check scope. Check each flag against the raw file and report only those that
+  hold up, under claims without support, with what the raw file actually says, plus a count ("N flags checked,
+  M confirmed"). Without a key, say "Jev claim check skipped".
 - Raw files with no source page (not yet ingested).
 - Source pages whose `raw:` points at a missing file.
 - Raw files with `fetch_status: failed` or `partial` (list them so the owner can supply the content).

@@ -13,3 +13,6 @@ __pycache__/
 
 # Downloaded reference material: large and re-downloadable, never committed
 cache/
+
+# Per-machine Jev setting: which environment variable holds the TypeSafe key. Never holds the key itself.
+tools/jev.local.json
