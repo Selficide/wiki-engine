@@ -59,8 +59,6 @@ In a Claude Code session:
 /plugin install wiki-engine@wiki-engine-market
 /wiki-engine:init C:\path\to\my-wiki "My Wiki"
 ```
-- **Private repo:** this needs git access to the repository on your machine (for GitHub, `gh auth login` then
-  `gh auth setup-git`).
 - **Plugin updates:** turn on auto-update for the marketplace in `/plugin`, or run `/plugin marketplace update`.
 - **Updating a vault:** a plugin update never changes your vaults by itself. Open a vault and run `/wiki-engine:sync`
   to bring it up to date.
@@ -94,6 +92,14 @@ Ingests can be checked by a model from a different family, which catches claims 
 This needs a tool that sends a read-only review request to the other model, such as an MCP server. Describe it in
 your own Claude Code instructions (`~/.claude/CLAUDE.md`), not in a vault: which tool to call, and how to check quota
 and record outcomes if it supports that. Without one, the step is skipped and the log says so.
+
+## Where it came from
+The engine was extracted from a working vault (about 460 pages across 13 topics by October 2026) once a second vault
+needed the same rules. Every rule in `meta/Engine.md` has its reason in `meta/Rationale.md`, mostly lessons from that
+vault: provenance labels for links an LLM infers, generated `sources:` and index instead of hand-synced copies, and
+reviews by a second model family. The cross-model reviewer used there is
+[agent-harness](https://github.com/Selficide/agent-harness), which lets Claude Code delegate read-only reviews to
+OpenAI's Codex.
 
 ## Changing the engine
 1. Edit under `files/` and test against your vaults (sync, then run each vault's tools).
