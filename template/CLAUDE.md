@@ -10,3 +10,4 @@ pattern). The owner supplies sources and questions. Claude maintains the wiki.
   `meta/Rationale.md` and `meta/Decisions.md` explain why the rules exist. Read them only when changing a rule.
   `meta/Ideas.md` is a backlog of possible vault changes. Read it only when considering one.
 - Workflows: `/ingest`, `/ask`, `/lint` (in `.claude/commands/`).
+- Where the rules or commands say `python` and only `python3` exists (common on macOS and Linux), run `python3`.

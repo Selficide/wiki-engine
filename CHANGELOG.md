@@ -5,6 +5,8 @@
   (`.claude-plugin/marketplace.json`, name `wiki-engine-market`).
 - Skills `/wiki-engine:init` and `/wiki-engine:sync` wrap `engine.py`. The plugin has no `version`, so installs track
   commits; vaults still record `ENGINE_VERSION` through sync.
+- macOS and Linux: the template's `CLAUDE.md` tells Claude to run `python3` where only that exists, and its settings
+  ask before `pip3` and `python3 -m pip` too. The README no longer suggests a shell alias, which hooks never see.
 
 ## 0.4.0 (2026-10-21)
 - **Optional Jev checks** (`meta/Engine.md`, "Jev"), using TypeSafe's Jev model through a standard-library client

@@ -20,7 +20,9 @@ sources, writes and links the wiki pages, cites every claim, and keeps the whole
 
 ## Requirements
 - [Claude Code](https://claude.com/claude-code).
-- Python 3.10+ on your PATH as `python`. On macOS and Linux, if only `python3` exists, add an alias.
+- Python 3.10+ on your PATH as `python` or `python3`. The commands say `python`; on macOS and Linux, where often only
+  `python3` exists, the vault's `CLAUDE.md` tells Claude to use that. (A shell alias doesn't help: hooks and Claude's
+  shell don't read it.)
 - git.
 - A Markdown viewer that understands wikilinks (see below).
 
